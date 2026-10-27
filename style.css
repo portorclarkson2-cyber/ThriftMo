@@ -233,7 +233,7 @@ nav .btn:hover {
 }
 
 .bgimg {
-  background: url("img/tg.png") center/cover no-repeat;
+  background: url("./tg.png") center/cover no-repeat;
   min-height: 100vh;
   position: relative;
   color: #e5dcc159;
