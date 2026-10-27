@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Thrift Mo - Items</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="img/73cb0c5d-7249-438e-81f1-b9e244933018.png" alt="Thrift Mo Logo" style="width: 50px; height: 50px;">
+      <strong>Thrift Mo</strong>
+    </div>
+    
+    <div class="nav-buttons">
+      <button class="btn" onclick="window.location.href='index.html'">Home</button>
+      <div class="dropdown">
+        <button class="btn">About Us ▼</button>
+        <div class="dropdown-content">
+          <button onclick="window.location.href='history.html'">Our History</button>   
+          <button onclick="window.location.href='mission.html'">Our Mission & Vision</button>
+        </div>
+      </div>
+      <button class="btn" onclick="window.location.href='news.html'">Annoncemet</button>
+      <button class="btn" onclick="window.location.href='items.html'">Items</button>
+      <button class="btn" onclick="window.location.href='contact.html'">Contact Us</button>
+    </div>
+
+    <div class="cart-nav" onclick="toggleCart()">
+      🛒 Cart (<span id="cartCount">0</span>)
+      </div>
+      
+      <div class="profile-wrapper" id="profileWrapper">
+        <button id="profileBtn" class="profile-btn">☰</button>
+        <ul id="profileMenu" class="profile-menu">
+          <li><a href="profile.html" class="profile-item">👤 My Profile</a></li>
+          <li><a href="login.html" class="profile-item">➜ Logout</a></li>
+        </ul>
+      </div>
+  </nav>
+
+<!-- PRODUCT VIEW -->
+<div id="productModal" class="product-modal">
+
+  <div class="product-box">
+  
+  <span class="close-btn" onclick="closeProduct()">✖</span>
+  
+  <img id="mainImage" class="main-img">
+  
+  <div id="thumbContainer" class="thumbs"></div>
+  
+  <h3 id="productTitle"></h3>
+  <p id="productDesc"></p>
+  <h4 id="productPrice"></h4>
+  
+  <button id="addCartBtn" class="order-btn">Add to Cart</button>
+  
+  </div>
+  
+  </div>
+
+  <!-- ===== CHECKOUT MODAL ===== -->
+<div id="checkoutModal" class="checkout-modal">
+
+  <div class="checkout-box">
+  
+  <span class="close-btn" onclick="closeCheckout()">✖</span>
+  
+  <h2>Checkout</h2>
+  
+  <label>Full Name</label>
+  <input type="text" id="custName" placeholder="Enter your name">
+  
+  <label>Phone Number</label>
+  <input type="text" id="custPhone" placeholder="09XXXXXXXXX">
+  
+  <label>Address</label>
+  <textarea id="custAddress" placeholder="Delivery address"></textarea>
+  
+  <label>Payment Method</label>
+  <select id="paymentMethod">
+  <option value="">Select Payment</option>
+  <option value="COD">Cash on Delivery</option>
+  <option value="GCash">GCash</option>
+  </select>
+  
+  <button class="order-btn" onclick="placeOrder()">Place Order</button>
+  
+  </div>
+  </div>
+
+<!-- GCash Payment -->
+<div id="gcashModal" class="checkout-modal" style="display:none;">
+  <div class="checkout-box">
+  
+  <span class="close-btn" onclick="closeGCash()">✖</span>
+  
+  <h2>Pay with GCash</h2>
+  
+  <p>Scan the QR Code to Pay</p>
+  
+  <img src="img/qr.png" style="width:200px">
+  
+  <p>GCash Number:</p>
+  <h3>09123456789</h3>
+  
+  <button class="order-btn" onclick="confirmGCash()">I Paid</button>
+  
+  </div>
+  </div>
+
+<!-- ORDER SUCCESS -->
+<div id="orderSuccess" class="checkout-modal" style="display:none;">
+
+  <div class="checkout-box">
+
+    <h2>✅ Order Successful</h2>
+
+    <p>Thank you for shopping at <strong>Thrift Mo</strong>!</p>
+
+    <p><strong>Order Total:</strong> ₱<span id="successTotal"></span></p>
+
+    <p>Your order will be processed shortly.</p>
+
+    <button class="order-btn" onclick="closeSuccess()">Continue Shopping</button>
+
+  </div>
+
+</div>
+
+<!-- ===== ITEMS SECTION ===== -->
+<div id="items" class="page" style="padding:30px 10px;">
+
+<h2 style="text-align:center;color:#a0522d;">✨ Thrift Items</h2>
+
+<div class="menu-tabs">
+<button class="tablink active" onclick="openMenu('Clothes',this)">Clothes</button>
+<button class="tablink" onclick="openMenu('Pants',this)">Pants</button>
+<button class="tablink" onclick="openMenu('Jackets',this)">Jackets</button>
+<button class="tablink" onclick="openMenu('Accessories',this)">Accessories</button>
+</div>
+
+<!-- ===== CLOTHES ===== -->
+<div id="Clothes" class="menu" style="display:block;">
+<div class="menu-grid">
+
+<div class="menu-item">
+    <img src="img/c1.webp" onclick="openProduct(
+    'Stussy Honolulu Black Tee',
+    150,
+    ['img/c1.webp','img/1c.webp',],
+    'Size: Large, Good condition.'
+    )">
+    <h5>Stussy Honolulu Black Tee</h5>
+    <p>₱1,500</p>
+    <button class="order-btn" onclick="addToCart('Stussy Honolulu Black Tee', 1500, 'img/c1.webp')">Add</button>
+    </div>
+
+<div class="menu-item">
+    <img src="img/c2.webp" onclick="openProduct(
+    'Tyler The Creator Supreme Tee',
+    2000,
+    ['img/c2.webp','img/2c.jpg', 'img/t2.webp'],
+    'Size: Large, Good condition.'
+    )">
+    <h5>Tyler The Creator Supreme Tee</h5>
+    <p>₱2,000</p>
+    <button class="order-btn" onclick="addToCart('Tyler The Creator Supreme Tee', 2000, 'img/c2.webp')">Add</button>
+    </div>
+
+<div class="menu-item">
+<img src="img/c3.webp">
+<h5>Vintage Graphic Tee</h5>
+<p>₱200</p>
+<button class="order-btn" onclick="addToCart('Vintage Graphic Tee',200)">Add</button>
+</div>
+
+</div>
+</div>
+
+<!-- ===== PANTS ===== -->
+<div id="Pants" class="menu">
+<div class="menu-grid">
+
+  <div class="menu-item">
+    <img src="img/p1.webp" onclick="openProduct(
+    'Carhartt Double Knee Blue Denim Loose Fit Workwear Pants Straight Leg Men',
+    1500,
+    ['img/p1.webp','img/1p.webp', 'img/t3.webp'],
+    'Dimes: 32x30, Crispy condition.'
+    )">
+    <h5>Carhartt Double Knee Blue Denim Loose Fit Workwear Pants Straight Leg Men</h5>
+    <p>₱1,500</p>
+    <button class="order-btn" onclick="addToCart('Carhartt Double Knee Blue Denim Loose Fit Workwear Pants Straight Leg Men', 1500, 'img/p1.webp')">Add</button>
+    </div>
+
+    <div class="menu-item">
+      <img src="img/p2.webp" onclick="openProduct(
+      'Dickies Original Fit 874 Black ',
+      700,
+      ['img/p2.webp','img/p2.1.webp', 'img/p2.2.webp', 'img/p2.3.webp'],
+      'Dimes: 34x32, Crispy condition.'
+      )">
+      <h5>CDickies Original Fit 874 Black </h5>
+      <p>₱700</p>
+      <button class="order-btn" onclick="addToCart('Dickies Original Fit 874 Black ', 700, 'img/p2.webp')">Add</button>
+      </div>
+
+</div>
+</div>
+
+<!-- ===== JACKETS ===== -->
+<div id="Jackets" class="menu">
+<div class="menu-grid">
+
+ <div class="menu-item">
+  <img src="img/j1.webp" onclick="openProduct(
+  'Charlotte Hornets Starter Jacket 1990s Vintage. Size Large Teal Purple Nylon',
+    3500,
+  ['img/j1.webp','img/1j.webp', 'img/t4.webp'],
+  'Dimes: 32x30, Good condition.'
+  )">
+  <h5>Charlotte Hornets Starter Jacket 1990s Vintage. Size Large Teal Purple Nylon</h5>
+  <p>₱3,500</p>
+  <button class="order-btn" onclick="addToCart('Charlotte Hornets Starter Jacket 1990s Vintage. Size Large Teal Purple Nylon', 3500, 'img/j1.webp')">Add</button>
+  </div>
+
+  <div class="menu-item">
+    <img src="img/j2.webp" onclick="openProduct(
+    'Champion Powerblend Mens Hoodie, Script Logo - Black',
+      450,
+    ['img/j2.webp','img/j2.1.webp', 'img/j2.2.webp', 'img/j2.3.webp'],
+    'Size XL, Good condition.'
+    )">
+    <h5>Charlotte Hornets Starter Jacket 1990s Vintage. Size Large Teal Purple Nylon</h5>
+    <p>₱450</p>
+    <button class="order-btn" onclick="addToCart('Charlotte Hornets Starter Jacket 1990s Vintage. Size Large Teal Purple Nylon', 450, 'img/j2.webp')">Add</button>
+    </div>
+
+</div>
+</div>
+
+<!-- ===== ACCESSORIES ===== -->
+<div id="Accessories" class="menu">
+<div class="menu-grid">
+
+<div class="menu-item">
+  <img src="img/h1.webp" onclick="openProduct(
+  'Chrome Hearts Black CH NYC Trucker Hat',
+  150,
+  ['img/h1.webp','img/h2.webp', 'img/h3.webp' , 'img/h4.webp'],
+  'Good condition.'
+  )">
+  <h5>Chrome Hearts Black CH NYC Trucker Hat</h5>
+  <p>₱34,000</p>
+  <button class="order-btn" onclick="addToCart('Chrome Hearts Black CH NYC Trucker Hat', 34000, 'img/h1.webp')">Add</button>
+  </div>
+
+  <div class="menu-item">
+    <img src="img/b.webp" onclick="openProduct(
+    'CNike Large Purple Black Grip Gym Bag Zip Closure with hand carry straps',
+    1200,
+    ['img/b.webp','img/b1.webp', 'img/b1.1.webp' , 'img/b1.2.webp'],
+    'Good condition.'
+    )">
+    <h5>Nike Large Purple Black Grip Gym Bag Zip Closure with hand carry straps</h5>
+    <p>₱1,200</p>
+    <button class="order-btn" onclick="addToCart('CNike Large Purple Black Grip Gym Bag Zip Closure with hand carry straps', 1200, 'img/b.webp')">Add</button>
+    </div>
+
+</div>
+</div>
+
+</div>
+
+<!-- ===== CART ===== -->
+<div id="cart" style="display:none;">
+<h3>🛒 Your Cart</h3>
+<ul id="cart-list"></ul>
+<p><strong>Total: ₱<span id="cart-total">0</span></strong></p>
+<button onclick="openCheckout()">Checkout</button></div>
+
+<!-- ===== POPUP ===== -->
+<div id="popup" class="popup">
+<div class="popup-content">
+<h3>Item Added!</h3>
+<p id="popup-message"></p>
+</div>
+</div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-container">
+  
+      <!-- Branches -->
+      <div class="footer-section">
+        <h3>🏢 Our Branches</h3>
+        <ul>
+          <li>Parañaque, Metro Manila</li>
+          <li>Pasay City, Metro Manila</li>
+          <li>Caloocan City, Metro Manila</li>
+        </ul>
+      </div>
+  
+      <!-- Contact -->
+      <div class="footer-section">
+        <h3>📞 Contact Us</h3>
+        <p>Phone: +63 929 551 5005</p>
+        <p>Phone: +63 926 395 8937</p>
+        <p>
+          Email:
+          <a href="mailto:thriftmo@gmail.com">thriftmo@gmail.com</a>
+        </p>
+      </div>
+  
+    </div>
+  
+    <!-- Bottom Section -->
+    <div class="footer-bottom">
+      <p>© 2026 Thrift Mo. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

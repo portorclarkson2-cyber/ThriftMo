@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register - Thrift Mo</title>
+  <!-- Font Awesome for eye icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ====== GLOBAL ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: url("img/tg.png") center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ====== REGISTER CARD ====== */
+    .register-box {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 14px;
+      padding: 40px 35px;
+      width: 500px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .register-box img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .register-box h2 {
+      margin-bottom: 20px;
+      font-size: 26px;
+      color: black;
+      font-weight: 700;
+    }
+
+    /* ====== INPUT GROUP ====== */
+    .input-group {
+      position: relative;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 40px 12px 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      outline: none;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .input-group input:focus {
+      border: 1px solid #004080; 
+      box-shadow: 0 0 6px rgba(0, 64, 128, 0.3);
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #555;
+      font-size: 18px;
+      user-select: none;
+    }
+
+    .toggle-password:hover {
+      color: #000000;
+    }
+
+    /* ====== BUTTON ====== */
+    .register-box button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      background: linear-gradient(135deg, #e6dada, #f3bc69); 
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .register-box button:hover {
+      background: linear-gradient(135deg, #beb1b1, #d4a45b); 
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); 
+    }
+
+    /* ====== LINKS & MESSAGES ====== */
+    .register-box p {
+      margin-top: 15px;
+      font-size: 16px;
+      color: black;
+    }
+
+    .register-box a {
+      color: #dfe2e4; 
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .register-box a:hover {
+      text-decoration: underline;
+    }
+
+    #msg {
+      margin-top: 12px;
+      font-size: 14px;
+      color: red;
+      min-height: 18px;
+      font-weight: bold;
+    }
+
+    /* ====== ANIMATION ====== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 420px) {
+      .register-box {
+        width: 90%;
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="register-box">
+    <img src="img/73cb0c5d-7249-438e-81f1-b9e244933018.png" alt="Datamex Logo">
+    <h2>Create Account</h2>
+
+    <div class="input-group">
+      <input type="text" id="name" placeholder="Full Name" required>
+    </div>
+
+    <div class="input-group">
+      <input type="email" id="email" placeholder="Email" required>
+    </div>
+
+    <div class="input-group">
+      <label for="birthday">Date of Birth (optional)</label>
+      <input type="date" id="birthday">
+    </div>
+
+    <div class="input-group">
+      <input type="tel" id="number" placeholder="Contact No." required>
+    </div>
+
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Password" required>
+      <i class="fa-solid fa-eye toggle-password" id="togglePassword1" onclick="togglePassword('password', 'togglePassword1')"></i>
+    </div>
+
+    <div class="input-group">
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+      <i class="fa-solid fa-eye toggle-password" id="togglePassword2" onclick="togglePassword('confirmPassword', 'togglePassword2')"></i>
+    </div>
+
+    <button onclick="register()">Register</button>
+
+    <p>Already have an account? <a href="login.html">Login</a></p>
+    <p id="msg"></p>
+  </div>
+
+  <script>
+    function togglePassword(fieldId, iconId) {
+      const field = document.getElementById(fieldId);
+      const icon = document.getElementById(iconId);
+  
+      if (field.type === "password") {
+        field.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+      } else {
+        field.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+      }
+    }
+  
+    async function register() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const number = document.getElementById("number").value.trim(); // ✅ added
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+      const msg = document.getElementById("msg");
+  
+      msg.textContent = "";
+  
+      if (!name || !email || !number || !password || !confirmPassword) {
+        msg.textContent = "⚠ Please fill all fields!";
+        return;
+      }
+  
+      if (password !== confirmPassword) {
+        msg.textContent = "⚠ Passwords do not match!";
+        return;
+      }
+  
+      try {
+        const res = await fetch("http://localhost:3000/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            email,
+            number,   // ✅ send to backend
+            password
+          })
+        });
+  
+        const data = await res.json();
+  
+        if (res.ok) {
+          alert("✅ Registration successful! You can now log in.");
+          window.location.href = "login.html";
+        } else {
+          msg.textContent = data.message || "⚠ Registration failed.";
+        }
+  
+      } catch (err) {
+        msg.textContent = "Server error: " + err.message;
+      }
+    }
+  </script>
+
+</body>
+</html>

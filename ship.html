@@ -1,0 +1,61 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <title>To Ship Orders - Thrift Mo</title>
+  <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="img/73cb0c5d-7249-438e-81f1-b9e244933018.png" alt="Thrift Mo Logo" style="width: 50px; height: 50px;">
+        <strong>Thrift Mo</strong>
+      </div>
+      
+      <div class="nav-buttons">
+        <button class="btn" onclick="window.location.href='index.html'">Home</button>
+        <div class="dropdown">
+          <button class="btn">About Us ▼</button>
+          <div class="dropdown-content">
+            <button onclick="window.location.href='history.html'">Our History</button>   
+            <button onclick="window.location.href='mission.html'">Our Mission & Vision</button>
+          </div>
+        </div>
+        <button class="btn" onclick="window.location.href='news.html'">Annoncemet</button>
+        <button class="btn" onclick="window.location.href='items.html'">Items</button>
+        <button class="btn" onclick="window.location.href='contact.html'">Contact Us</button>
+      </div>
+
+      <div class="cart-nav" onclick="toggleCart()">
+        🛒 Cart (<span id="cartCount">0</span>)
+        </div>
+        
+        <div class="profile-wrapper" id="profileWrapper">
+          <button id="profileBtn" class="profile-btn">☰</button>
+          <ul id="profileMenu" class="profile-menu">
+            <li><a href="profile.html" class="profile-item">👤 My Profile</a></li>
+            <li><a href="login.html" class="profile-item">➜ Logout</a></li>
+          </ul>
+        </div>
+    </nav>
+
+
+  <h2 style="text-align:center; color:#a0522d;">📦 To Ship Orders</h2>
+
+  <div id="ordersContainer" style="padding:20px;">
+    <!-- Orders will be injected here -->
+  </div>
+
+  <div id="cart" style="display:none;">
+    <h3>🛒 Your Cart</h3>
+    <ul id="cart-list"></ul>
+    <p><strong>Total: ₱<span id="cart-total">0</span></strong></p>
+    <button onclick="openCheckout()">Checkout</button></div>
+
+
+  <script src="ship.js"></script>
+  <script src="script.js"></script>
+  </body>
+  </html>

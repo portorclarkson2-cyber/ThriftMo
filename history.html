@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our History - Datamex College Of Saint Adeline</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="img/73cb0c5d-7249-438e-81f1-b9e244933018.png" alt="Thrift Mo Logo" style="width: 50px; height: 50px;">
+      <strong>Thrift Mo</strong>
+    </div>
+    
+    <div class="nav-buttons">
+      <button class="btn" onclick="window.location.href='index.html'">Home</button>
+      <div class="dropdown">
+        <button class="btn">About Us ▼</button>
+        <div class="dropdown-content">
+          <button onclick="window.location.href='history.html'">Our History</button>   
+          <button onclick="window.location.href='mission.html'">Our Mission & Vision</button>
+        </div>
+      </div>
+      <button class="btn" onclick="window.location.href='news.html'">Annoncemet</button>
+      <button class="btn" onclick="window.location.href='items.html'">Items</button>
+      <button class="btn" onclick="window.location.href='contact.html'">Contact Us</button>
+    </div>
+
+    <div class="cart-nav" onclick="toggleCart()">
+      🛒 Cart (<span id="cartCount">0</span>)
+      </div>
+      
+      <div class="profile-wrapper" id="profileWrapper">
+        <button id="profileBtn" class="profile-btn">☰</button>
+        <ul id="profileMenu" class="profile-menu">
+          <li><a href="profile.html" class="profile-item">👤 My Profile</a></li>
+          <li><a href="login.html" class="profile-item">➜ Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<!-- ===== MAIN CONTENT ===== -->
+<main style="padding: 60px 20px; max-width: 900px; margin: auto;">
+  <section class="card">
+    <h1 style="color:#4F46E5; font-size: 48px; text-align:center;">Our History</h1>
+    
+    <p style="font-size:16px; line-height:1.8; margin-top:20px; text-align:justify;">
+      Welcome to <strong>Thrift Mo!</strong>
+    </p>
+
+    <p>Ang aming thrift shop ay nagsimula sa simpleng ideya na bigyan ng <strong>pangalawang buhay ang mga damit</strong>
+    habang nagbibigay ng <strong>affordable at stylish na options</strong> sa mga tao.</p>
+
+    <p style="font-size:16px; line-height:1.8; text-align:justify; margin-top: 50px;">
+      Nagsimula kami bilang maliit na online thrift store na nagbebenta ng <strong>pre-loved clothes</strong> na maingat na
+      pinipili upang siguraduhin ang magandang kalidad. Sa paglipas ng panahon, lumaki ang aming koleksyon at
+      patuloy kaming naghahanap ng mga unique at fashionable pieces para sa aming customers.
+    </p>
+
+    
+</main>
+
+
+<div id="cart" style="display:none;">
+  <h3>🛒 Your Cart</h3>
+  <ul id="cart-list"></ul>
+  <p><strong>Total: ₱<span id="cart-total">0</span></strong></p>
+  <button onclick="openCheckout()">Checkout</button></div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h2>🏫 Branches</h2>
+      <p>Parañaque, Metro Manila</p>
+      <p>Pasay City, Metro Manila</p>
+      <p>Caloocan City, Metro Manila</p>
+    </div>
+
+    <div class="footer-section">
+      <h2>📞 Contact</h2>
+      <p>+63-929-551-5005</p>
+      <p>+63-926-395-8937</p>
+      <p>Email: <a href="mailto:info@datamex.edu.ph">info@datamex.edu.ph</a></p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Datamex College Of Saint Adeline. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

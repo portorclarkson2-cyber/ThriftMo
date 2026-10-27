@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Thrift Mo</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-container { padding: 40px; max-width: 1000px; margin: auto; }
+        .admin-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .admin-table th, .admin-table td { border-bottom: 1px solid #ddd; padding: 12px; text-align: left; }
+        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
+        .form-group input, .form-group textarea, .form-group select { padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+        .status-badge { padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .status-paid { background: #dcfce7; color: #166534; }
+    </style>
+</head>
+<body>
+    <nav>
+        <strong>Thrift Mo Admin</strong>
+        <div class="nav-buttons">
+            <button class="btn" onclick="location.href='index.html'">View Site</button>
+            <button class="btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="admin-container">
+        <h2>🛠️ Control Center</h2>
+        
+        <div class="admin-card">
+            <h3>Add New Item</h3>
+            <div class="form-group">
+                <input type="text" id="pName" placeholder="Product Name">
+                <input type="number" id="pPrice" placeholder="Price (₱)">
+                <input type="text" id="pImg" placeholder="Image URL (e.g., img/c4.webp)">
+                <select id="pCategory">
+                    <option value="Clothes">Clothes</option>
+                    <option value="Pants">Pants</option>
+                    <option value="Jackets">Jackets</option>
+                    <option value="Accessories">Accessories</option>
+                </select>
+                <button class="order-btn" style="margin-top:10px" onclick="addProduct()">List Item</button>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <h3>Incoming Orders</h3>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="adminOrdersBody">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Load data on start
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAdminOrders();
+        });
+
+        function renderAdminOrders() {
+            const orders = JSON.parse(localStorage.getItem("paidOrders")) || [];
+            const body = document.getElementById("adminOrdersBody");
+            body.innerHTML = orders.map((order, index) => `
+                <tr>
+                    <td>#${index + 1}</td>
+                    <td>${order.customer.name}</td>
+                    <td>
+  ₱${order.total}<br>
+  <small>${order.items.map(item => item.name).join(", ")}</small>
+</td>
+                    <td><span class="status-badge status-paid">PAID (${order.payment})</span></td>
+                    <td><button onclick="deleteOrder(${index})">🗑️</button></td>
+                </tr>
+            `).join('');
+        }
+
+        function deleteOrder(index) {
+            let orders = JSON.parse(localStorage.getItem("paidOrders"));
+            orders.splice(index, 1);
+            localStorage.setItem("paidOrders", JSON.stringify(orders));
+            renderAdminOrders();
+        }
+
+        function addProduct() {
+            // Logic to push to a database or shared JSON
+            alert("In a real app, this would send a POST request to your Node server!");
+        }
+
+        function logout() {
+            location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

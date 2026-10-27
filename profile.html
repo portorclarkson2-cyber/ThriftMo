@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile - Thrift Mo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<style>
+  
+/* ===== PROFILE PAGE LAYOUT ===== */
+.profile-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 140px 20px 60px;
+  background: linear-gradient(135deg, #b22222, #004aad);
+}
+
+/* ===== PROFILE CARD ===== */
+.profile-card {
+  width: 420px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 35px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+  transition: 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+}
+
+/* ===== PROFILE IMAGE ===== */
+.profile-card img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+  margin-bottom: 15px;
+}
+
+/* Change Photo Button */
+.profile-card button {
+  background: #004aad;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+
+.profile-card button:hover {
+  background: #b22222;
+}
+
+/* ===== TEXT ===== */
+.profile-card h2 {
+  margin-bottom: 5px;
+}
+
+.profile-card p {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+/* ===== INFO BOXES ===== */
+.info {
+  background: rgba(255,255,255,0.2);
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.info input {
+  width: 100%;
+  margin-top: 5px;
+  padding: 6px;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+}
+
+/* ===== BUTTON GROUP ===== */
+.btn-group {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-group .btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #004aad, #b22222);
+  color: white;
+  transition: 0.3s;
+}
+
+.btn-group .btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+</style>
+
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="img/73cb0c5d-7249-438e-81f1-b9e244933018.png" alt="Thrift Mo Logo" style="width: 50px; height: 50px;">
+      <strong>Thrift Mo</strong>
+    </div>
+    
+    <div class="nav-buttons">
+      <button class="btn" onclick="window.location.href='index.html'">Home</button>
+      <div class="dropdown">
+        <button class="btn">About Us ▼</button>
+        <div class="dropdown-content">
+          <button onclick="window.location.href='history.html'">Our History</button>   
+          <button onclick="window.location.href='mission.html'">Our Mission & Vision</button>
+        </div>
+      </div>
+      <button class="btn" onclick="window.location.href='news.html'">Annoncemet</button>
+      <button class="btn" onclick="window.location.href='items.html'">Items</button>
+      <button class="btn" onclick="window.location.href='contact.html'">Contact Us</button>
+    </div>
+
+    <div class="cart-nav" onclick="toggleCart()">
+      🛒 Cart (<span id="cartCount">0</span>)
+      </div>
+      
+      <div class="profile-wrapper" id="profileWrapper">
+        <button id="profileBtn" class="profile-btn">☰</button>
+        <ul id="profileMenu" class="profile-menu">
+          <li><a href="profile.html" class="profile-item">👤 My Profile</a></li>
+          <li><a href="login.html" class="profile-item">➜ Logout</a></li>
+        </ul>
+      </div>
+  </nav>
+
+
+  <!-- ===== PROFILE SECTION ===== -->
+  <div class="profile-page">
+
+    <div class="profile-card">
+
+      <img src="img/profile.png" id="profileImage" alt="Profile Picture">
+
+      <button onclick="document.getElementById('fileInput').click()">
+        📸 Change Photo
+      </button>
+
+      <input type="file" id="fileInput" accept="image/*"
+             style="display:none"
+             onchange="changeProfilePic(event)">
+
+      <h2 id="profileName">Customer Name</h2>
+      <p id="profileEmail">customer@email.com</p>
+
+      <div class="info">
+        📞 Contact:
+        <input type="text" id="profileContact" disabled>
+      </div>
+
+      <div class="info">
+        🏠 Delivery Address:
+        <input type="text" id="profileAddress" disabled>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn" onclick="toggleEdit()">✏️ Edit</button> 
+      <button class="btn" onclick="window.location.href='ship.html'">To Ship📦</button>
+        <button class="btn" onclick="logout()">🚪 Logout</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ===== TO SHIP SECTION ===== -->
+<div id="toShipSection" style="display:none; padding:120px 20px 40px;">
+
+  <h2 style="text-align:center; color:white;">📦 Your To Ship Orders</h2>
+
+  <div id="ordersContainer"></div>
+
+</div>
+
+<div id="cart" style="display:none;">
+  <h3>🛒 Your Cart</h3>
+  <ul id="cart-list"></ul>
+  <p><strong>Total: ₱<span id="cart-total">0</span></strong></p>
+  <button onclick="openCheckout()">Checkout</button></div>
+
+
+  <!-- ===== SCRIPT ===== -->
+  <script>
+    const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    let allUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+    if (!currentUser) {
+      window.location.href = "login.html";
+    }
+
+    let user = allUsers.find(u => u.email === currentUser.email) || currentUser;
+
+    function loadProfile() {
+      document.getElementById("profileName").innerText = user.name || "Customer";
+      document.getElementById("profileEmail").innerText = user.email || "";
+      document.getElementById("profileContact").value = user.contact || "";
+      document.getElementById("profileAddress").value = user.address || "";
+
+      if (user.image) {
+        document.getElementById("profileImage").src = user.image;
+      }
+    }
+
+    loadProfile();
+
+    let editMode = false;
+
+    function toggleEdit() {
+      const contact = document.getElementById("profileContact");
+      const address = document.getElementById("profileAddress");
+      const btn = event.target;
+
+      if (!editMode) {
+        contact.disabled = false;
+        address.disabled = false;
+        btn.textContent = "💾 Save";
+        editMode = true;
+      } else {
+        user.contact = contact.value;
+        user.address = address.value;
+
+        saveUserData();
+
+        contact.disabled = true;
+        address.disabled = true;
+        btn.textContent = "✏️ Edit";
+        editMode = false;
+
+        alert("Profile updated successfully!");
+      }
+    }
+
+    function changeProfilePic(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        user.image = e.target.result;
+        document.getElementById("profileImage").src = e.target.result;
+        saveUserData();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function saveUserData() {
+      const index = allUsers.findIndex(u => u.email === user.email);
+
+      if (index >= 0) {
+        allUsers[index] = user;
+      } else {
+        allUsers.push(user);
+      }
+
+      localStorage.setItem("users", JSON.stringify(allUsers));
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "login.html";
+    }
+
+    function showToShip() {
+  document.querySelector(".profile-page").style.display = "none";
+  document.getElementById("toShipSection").style.display = "block";
+  loadOrders();
+}
+
+function loadOrders() {
+  const orders = JSON.parse(localStorage.getItem("orders")) || [];
+  const container = document.getElementById("ordersContainer");
+
+  container.innerHTML = "";
+
+  if (orders.length === 0) {
+    container.innerHTML = "<p style='text-align:center; color:white;'>No orders to ship.</p>";
+    return;
+  }
+
+  orders.forEach(item => {
+    container.innerHTML += `
+      <div style="
+        background:white;
+        padding:15px;
+        margin:10px auto;
+        width:300px;
+        border-radius:10px;
+        text-align:center;
+      ">
+        <img src="${item.image}" style="width:100px; height:100px; object-fit:cover; border-radius:10px;">
+        <h4>${item.name}</h4>
+        <p>₱${item.price}</p>
+      </div>
+    `;
+  });
+}
+  </script>
+  <script src="script.js"></script>
+
+</body>
+</html>

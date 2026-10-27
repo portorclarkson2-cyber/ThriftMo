@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>News & Articles - Aria's Cafe</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ===== NEWS PAGE STYLE ===== */
+    .news-section{
+      padding:80px 10%;
+      background:#f5f0e6;
+    }
+
+    .news-title{
+      text-align:center;
+      font-size:42px;
+      margin-bottom:50px;
+      color:#8b4513;
+    }
+
+    .news-container{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:30px;
+    }
+
+    .news-card{
+      background:white;
+      border-radius:15px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      overflow:hidden;
+      transition:0.3s;
+    }
+
+    .news-card:hover{
+      transform:translateY(-5px);
+    }
+
+    .news-card img{
+      width:100%;
+      height:200px;
+      object-fit:cover;
+    }
+
+    .news-content{
+      padding:20px;
+    }
+
+    .news-content h3{
+      margin-bottom:10px;
+      color:#8b4513;
+    }
+
+    .news-content p{
+      font-size:14px;
+      margin-bottom:15px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="img/73cb0c5d-7249-438e-81f1-b9e244933018.png" alt="Thrift Mo Logo" style="width: 50px; height: 50px;">
+      <strong>Thrift Mo</strong>
+    </div>
+    
+    <div class="nav-buttons">
+      <button class="btn" onclick="window.location.href='index.html'">Home</button>
+      <div class="dropdown">
+        <button class="btn">About Us ▼</button>
+        <div class="dropdown-content">
+          <button onclick="window.location.href='history.html'">Our History</button>   
+          <button onclick="window.location.href='mission.html'">Our Mission & Vision</button>
+        </div>
+      </div>
+      <button class="btn" onclick="window.location.href='news.html'">Annoncemet</button>
+      <button class="btn" onclick="window.location.href='items.html'">Items</button>
+      <button class="btn" onclick="window.location.href='contact.html'">Contact Us</button>
+    </div>
+
+    <div class="cart-nav" onclick="toggleCart()">
+      🛒 Cart (<span id="cartCount">0</span>)
+      </div>
+      
+      <div class="profile-wrapper" id="profileWrapper">
+        <button id="profileBtn" class="profile-btn">☰</button>
+        <ul id="profileMenu" class="profile-menu">
+          <li><a href="profile.html" class="profile-item">👤 My Profile</a></li>
+          <li><a href="login.html" class="profile-item">➜ Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+  <!-- ===== NEWS SECTION ===== -->
+  <section class="news-section">
+
+    <h1 class="news-title">What's New?</h1>
+
+    <div class="news-container">
+
+      <!-- Article 1 -->
+      <div class="news-card">
+        <img src="img/a1.jpg" alt="New Branch">
+        <div class="news-content">
+          <h3>Opens New Branch!</h3>
+          <p>We are excited to announce the opening of our newest branch this 2026. Visit us and enjoy!</p>
+        </div>
+      </div>
+
+      <!-- Article 2 -->
+      <div class="news-card">
+        <img src="img/bulto.jpg" alt="New Menu">
+        <div class="news-content">
+          <h3>New Arrival!</h3>
+          <p>Try our refreshing summer specials made with premium ingredients and crafted for coffee lovers.</p>
+        </div>
+      </div>
+
+      <!-- Article 3 -->
+      <div class="news-card">
+        <img src="img/promo.jpg" alt="Event">
+        <div class="news-content">
+          <h3>Promo/Discount Alert!</h3>
+          <p>Join our free coffee workshop this month and learn brewing techniques from our professional baristas.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div id="cart" style="display:none;">
+    <h3>🛒 Your Cart</h3>
+    <ul id="cart-list"></ul>
+    <p><strong>Total: ₱<span id="cart-total">0</span></strong></p>
+    <button onclick="openCheckout()">Checkout</button></div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-container">
+      
+      <div class="footer-section">
+        <h2>📍 Branches</h2>
+        <p>Parañaque, Metro Manila</p>
+        <p>Pasay City, Metro Manila</p>
+        <p>Caloocan City, Metro Manila</p>
+      </div>
+
+      <div class="footer-section">
+        <h2>📞 Contact</h2>
+        <p>+63-929-551-5005</p>
+        <p>+63-926-395-8937</p>
+        <p>Email: <a href="mailto:info@ariascafe.com">info@ariascafe.com</a></p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Aria's Cafe. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
